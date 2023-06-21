@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Card from './components/Card' 
 import './App.css'
-
+import store from './redux/store'
+import { Provider } from 'react-redux'
 function App() {
-  const [count, setCount] = useState(0)
-
+  
+let users= [1,2,3,4,5,6,7,8,9,10]
+console.log(users.slice(0,5))
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Provider store={store}>
+      {console.log(store.getState())}
+      <div className='container'>
+      <div className='d-flex justify-content-between align-items-center mb-4'>
+        {users.slice(0,5).map(user=><Card user={user}/>)}
+        <Card/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className='d-flex justify-content-between align-items-center'>
+        {users.slice(5,10).map(user=><Card  className="col-2"/>)}
+        <Card/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {console.log(store)}
+    </div>
+    </Provider>
+    
   )
 }
 
